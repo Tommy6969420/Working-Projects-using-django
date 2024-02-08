@@ -1,0 +1,19 @@
+<html>
+
+<head>
+    <title>
+       Tasks 
+    </title>
+</head>
+<body>
+    {% for task in tasks %}
+    <p> {{task.name}}</p>
+        {% endfor %}
+
+        <form action="{%url 'index'%}" method="post">
+{%csrf_token%}
+            {{form}}
+            
+        </form>
+</body>
+    </html>

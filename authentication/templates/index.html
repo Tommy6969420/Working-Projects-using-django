@@ -1,0 +1,12 @@
+
+
+<form action="{% url 'auth' %}" method="post">
+{%csrf_token%}
+
+<input type="text" name="username" id="">
+<input type="password" name="password">
+
+    <button type="submit">
+        Submit
+    </button>
+</form>

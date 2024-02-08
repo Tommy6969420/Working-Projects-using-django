@@ -1,0 +1,34 @@
+from django.db import models
+from django import forms 
+
+# Create your models here.
+
+class Class(models.Model):
+    name=models.CharField(max_length=50)
+    def __str__(self):
+        return f'{self.name}'
+
+class Student(models.Model):
+    GENDER_CHOICES=(('Male',"Male"),
+        ('Female','Female'),
+        ('Others','Others')
+    )
+    student_name=models.CharField(max_length=64)
+    fathers_name=models.CharField(max_length=64)
+    mothers_name=models.CharField(max_length=64)
+    date_of_birth=models.DateField( auto_now=False, auto_now_add=False)
+    gender=models.CharField(choices=GENDER_CHOICES,max_length=10,default=False)
+    present_address=models.CharField(max_length=64)
+    permanent_address=models.CharField(max_length=64)
+    student_phone_no=models.CharField(max_length=15)
+    emergency_phone_no=models.CharField(max_length=15)
+    course=models.ForeignKey(Class,on_delete=models.CASCADE)
+    students_email=models.EmailField()
+    accept_terms=models.BooleanField( )
+    admission_date=models.DateField(auto_now=True)
+    def __str__(self):
+        return f'{self.student_name} {self.course}'
+    
+     
+
+    
