@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lobby</title>
+</head>
+<body>
+<h1>
+    Welcome to the Meeting
+</h1>   
+<h4 id="username">
+  {{username}}
+</h4> 
+<div id="chat">
+    <p>Chat</p>
+</div>
+<form action="" id="form">
+    <input type="text" id="message" name="message" autofocus>
+    <input type="submit" value="Send">
+</form>
+<script>
+let url = `ws://${window.location.host}/ws/socket/`
+const meetingSocket = new WebSocket(url); 
+
+meetingSocket.onopen = function(e) {   //on open connection
+  console.log("Connection established");
+};
+
+meetingSocket.onmessage=function(e){ //on message receive
+  console.log(e)
+  let data = JSON.parse(e.data);
+  if(data.type === 'chat'){
+   let chat = document.getElementById('chat');
+    chat.innerHTML += `<p>${data.message}</p>`;
+  }
+
+}
+ 
+
+meetingSocket.onerror = function(error) { //on error
+  console.log(`WebSocket error: ${error}`);
+};
+
+meetingSocket.onclose = function(e) { //on close connection
+  console.log("Connection closed");
+};
+let form=document.getElementById('form');
+form.addEventListener('submit',function(e){
+    e.preventDefault();
+    let message = document.getElementById('message').value;
+    let username = document.getElementById('username').innerHTML;
+    meetingSocket.send(JSON.stringify({
+        'message':`${username}:${message}` 
+    }));
+    form.reset(); 
+});
+</script>
+</body>
+</html>

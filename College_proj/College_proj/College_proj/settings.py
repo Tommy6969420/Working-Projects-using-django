@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-   
-    'whitenoise.runserver_nostatic',
+    'channels',
+    'daphne',
+  'whitenoise.runserver_nostatic',
     'bootstrap5',
     'administration',
     'meetings',
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,8 +74,16 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'College_proj.wsgi.application'
+
 ASGI_APPLICATION = "College_proj.asgi.application"
+WSGI_APPLICATION = 'College_proj.wsgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+    "BACKEND":'channels.layers.InMemoryChannelLayer',
+    }
+
+}
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -128,3 +137,4 @@ STATIC_ROOT= BASE_DIR/'static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR/'media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

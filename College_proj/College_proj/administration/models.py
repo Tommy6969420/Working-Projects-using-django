@@ -39,4 +39,11 @@ class Instructor(models.Model):
     # course=models.ForeignKey(Class,on_delete=models.CASCADE)
     def __str__(self):
         return f'{self.name}'
-    
+class Gallery(models.Model):
+    image=models.ImageField(upload_to='gallery/')
+    description=models.TextField()
+    def __str__(self):
+        return f'{self.description}'
+class Notice(models.Model):
+    name=models.CharField(max_length=64)
+    description=models.TextField()

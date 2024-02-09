@@ -1,5 +1,5 @@
 from django.contrib import admin
-from . models import Class, Student, Instructor
+from . models import Class, Student, Instructor, Gallery, Notice
 # Register your models here.
 
 admin.site.register(Class)
@@ -13,3 +13,7 @@ class InstructorsAdmin(admin.ModelAdmin):
     list_filter = ['qualification','experience']
     search_fields = ['name','teacher_email','qualification','experience']
     list_per_page= 10
+admin.site.register(Gallery)
+admin.site.register(Notice)
+
+

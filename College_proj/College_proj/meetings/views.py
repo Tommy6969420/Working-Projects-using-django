@@ -7,16 +7,22 @@ def authenticate(request):
         username=request.POST.get("username")
         password=request.POST.get("password")
         users=Users.objects.values("username","password")
-        for i in range(users.count()):
-            if username == users[i]["username"]:
-                if password==users[i]["password"]:
+        print(users.count())
+        usernames=[users[i]["username"]for i in range(users.count())]
+        passwords=[users[i]["password"]for i in range(users.count())]
+        try:
+            if usernames.index(username) >= 0:
+                if passwords[usernames.index(username)]==password:
                     data_to_pass = {"username":username}
                     request.session['data'] = data_to_pass
-                    return redirect('/meetings/meeting/')
-                context={'response':'Password Unmatched'}
+                    return redirect('/meetings/')
+                else:
+                    context={'response':'Password Unmatched'}
                 return render(request,"meetings/auth.html",context)
+        except ValueError:
             context={'response':'Username not found'}
             return render(request,"meetings/auth.html",context)
+        print(passwords)
     context={'response':'Please enter your credentials'}
     return render(request,"meetings/auth.html",context)
 def  meetings(request):
@@ -25,7 +31,7 @@ def  meetings(request):
         context={
             'username':data_received['username']
         }
-        return render(request,"meetings/meetings.html",context)
+        return render(request,"meetings/lobby.html",context)
     else:
         return redirect('/meetings/auth/')
     
