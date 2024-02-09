@@ -28,7 +28,15 @@ class Student(models.Model):
     admission_date=models.DateField(auto_now=True)
     def __str__(self):
         return f'{self.student_name} {self.course}'
-    
-     
-
+class Instructor(models.Model):
+    name=models.CharField(max_length=64)
+    photo=models.ImageField(upload_to='instructors/')
+    teacher_email=models.EmailField()
+    qualification=models.CharField(max_length=64)
+    experience=models.TextField()
+    phone_no=models.CharField(max_length=15)
+    address=models.CharField(max_length=64)
+    # course=models.ForeignKey(Class,on_delete=models.CASCADE)
+    def __str__(self):
+        return f'{self.name}'
     

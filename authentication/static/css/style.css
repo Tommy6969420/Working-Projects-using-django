@@ -1,0 +1,152 @@
+/* CSS RESET */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+
+  }
+  
+/* Body Styling Beginning */
+body{
+    background: rgb(39, 38, 38);
+    font-family: 'Times New Roman', Times, serif;
+    text-decoration: none;
+    padding:10px;
+    height: 100%;
+}
+
+.navSection{
+
+    width: 100%;
+    /* max-width: 700px; */
+    background: linear-gradient(0deg, black, transparent);
+    border: none;
+    border-radius: none;
+    padding: 5px;
+    margin-bottom: 75px;
+}
+
+.logo{
+    display: block;
+    margin: auto;
+    text-align: center;
+    color: white;
+    font-family: sans-serif;
+
+}
+.container{
+    max-width: 400px;
+    margin: auto;
+    margin-top: 75px;
+    background: linear-gradient(45deg, black, transparent);
+    height: 300px;
+    border: white;
+    border-radius: 15px;
+    color: white;
+    border-width: medium;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.card{
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+    height: 95%;
+}
+.top{
+    width: auto;
+    align-items: center;
+    justify-content: center;
+    height: 40%;
+}
+form{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 14px;
+}
+.inputSection{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+.username{
+    padding-right: 15px;
+}
+
+.password{
+    padding-right: 17px;
+}
+
+.btn{
+    padding: 3px;
+    width: 33%;
+    max-width: 211px;
+    margin: auto;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border-width: 1px;
+    border-color: white;
+}
+.btn:hover{
+    background-color: white;
+    color : black;
+
+}
+
+.fillers{
+    text-align: center;
+    display: block;
+    margin: auto;
+}
+.signUp{
+    text-align: center;
+}
+.bottom{
+    display: grid;
+    grid-gap: 7px;
+    grid-auto-columns: auto;
+}
+
+a{
+    color: white;
+    text-decoration: none;
+
+}
+
+a:hover{
+    color: bflue;
+    font-weight: bold;
+}
+a:visited{
+    color: aliceblue ;
+}
+::placeholder {
+    background-color:transparent;
+    color: #fbfcf6;
+    opacity: 1; 
+    font-size: smaller;
+    font-weight:lighter;
+  }
+input{
+    background-color: transparent;
+    border-color: white;
+    border-radius: 0;
+    border-width: 1px;
+    padding:3px;
+    color: #fbfcf6;
+}
