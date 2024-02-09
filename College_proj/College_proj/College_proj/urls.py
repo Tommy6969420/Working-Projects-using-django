@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/',views.index),
     path('',include("administration.urls")),
+    path('meetings/',include("meetings.urls")),
 ]

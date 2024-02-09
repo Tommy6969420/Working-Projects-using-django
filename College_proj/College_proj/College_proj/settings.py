@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'bootstrap5',
     'administration',
+    'meetings',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
