@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connects</title>
+</head>
+<body>
+    User:{{user.username}}
+    <h1>Friends</h1>
+    <ul id="friends-list">
+        {% for friend in friends %}
+        <li ng-repeat="friend in friends">
+            <a href="">{{friend.friends__username}}</a>
+        </li>
+        {% endfor %}
+    </ul>
+    <h2>  Add new Connects: </h2>
+        <ul> {% for add_friend in add_friends %}
+
+            <li id="add-{{add_friend.username}}">{{add_friend.username}} <button onclick="addFriend('{{add_friend.username}}')">add</button></li><p id="add-response"></p>
+            {% endfor %}
+        </ul>
+    <h2>Requests</h2>
+        <ul><p id="add-response"></p> {% for req_friend in req_friends %}
+            <li id="req-{{req_friend.user__username}}">{{req_friend.user__username}} <button onclick="acceptRequest('{{req_friend.user__username}}')">add</button>
+            </li>{% endfor %}
+        </ul>
+    <h2>Requested</h2>
+        <ul id="requested-list">
+            
+        </ul>
+  <script>
+    function addFriend(friend){
+        //needs to be modified for different domains.
+       url=`http://127.0.0.1:8000/chat/add-connects/`
+       username="{{user.username}}"
+       console.log(username)
+        fetch(url,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "X-CSRFToken":"{{csrf_token}}"
+            },
+            body:JSON.stringify({username:username,friend:friend})
+        }).then(response=>{
+            if(response.ok){
+                return response.json()
+            }
+        }).then(data=>{
+            document.getElementById(`add-${friend}`).style.display="none"
+            document.getElementById("requested-list").innerHTML+=`<li><a href="">${friend}</a></li>`
+            document.getElementById("add-response").innerHTML="Request Sent after request accepted you can do messaging"
+        })
+    }
+
+    function acceptRequest(friend){
+       
+        //needs to be modified for different domains.
+        url=`http://127.0.0.1:8000/chat/add-connects/`
+       username="{{user.username}}"
+        fetch(url,{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json",
+                "X-CSRFToken":"{{csrf_token}}"
+            },
+            body:JSON.stringify({username:username,friend:friend})
+            
+        }).then(response=>{
+            if(response.ok){
+                document.getElementById("friends-list").innerHTML+=`<li><a href="">${friend}</a></li>`
+                document.getElementById(`req-${friend}`).style.display="none" 
+                 console.log(friend)
+                return response.json()
+                console.log(friend)
+            }
+        }).then(data=>{
+            // document.getElementById(`${frien}`).innerHTML="You are friends now. You can do messaging now."
+
+        })
+    }
+
+  </script>
+</body>
+</html>

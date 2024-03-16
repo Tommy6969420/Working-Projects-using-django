@@ -79,11 +79,13 @@ ASGI_APPLICATION = "College_proj.asgi.application"
 WSGI_APPLICATION = 'College_proj.wsgi.application'
 
 CHANNEL_LAYERS = {
-    'default': {
-    "BACKEND":'channels.layers.InMemoryChannelLayer',
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+
+        },
     }
 
-}
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

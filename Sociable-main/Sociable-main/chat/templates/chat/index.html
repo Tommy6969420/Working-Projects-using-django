@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+{%load static%}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect</title>
+<link rel="stylesheet" href="{% static 'css/chat.css'%}">
+</head>
+
+<body>
+  <div>
+    {%for us in user%}<h1 id="username">
+      {{us.username}} 
+      
+    </h1><p id="sender">{{us.id}}</p>{%endfor%}
+  </div>
+  <div class="connected">
+      {% for reciever in recievers %}
+    <p onclick="openChat({{reciever.friends__id}})"  class="friends" id="txt{{reciever.friends__id}}">
+      {{reciever.friends__username}}
+    </p>
+    {% endfor %}
+  </div>
+  <div id="messageContainer">
+  </div>
+<div class="sendMessage" id="sendMessage">
+  <p>Send Messages:</p>
+    <input type="text" name="message" id='inputMsg' autofocus>
+    <input type="submit" value="Send" id="msgBtn"  onclick="postMessage()">
+</div>
+<p id="reciever">
+</p>
+<script>
+
+  function postMessage(){
+    let message = document.getElementById('inputMsg').value;
+    user_by = parseInt(user_by);
+    let data = {
+        by: user_by,
+        to: to_id,
+        message: message
+    }
+    console.log(data)
+    fetch("{%url 'post-message'%}", {
+    method: "POST",
+    headers: {'Content-Type': 'application/json',
+    'X-CSRFToken': "{{csrf_token}}"}, 
+    body: JSON.stringify(data)
+    }).then(res => {
+    console.log("Request complete! response:", res);
+    to_id=to_id;
+    }).catch(error => console.error('Error:', error));
+    }
+  </script>  <script src="{% static "js/script.js" %}">
+</script>
+</body>
+
+</html>

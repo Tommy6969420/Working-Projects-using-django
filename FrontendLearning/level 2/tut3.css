@@ -1,0 +1,17 @@
+#box{
+
+background-color: blue;
+
+}
+.headings{
+    color:red;
+}
+.btn{
+    background-color: green;
+}
+h1{
+    text-align: right;
+}
+p{
+    text-align: center;  /* alignment in direct relation with parent element*/
+}

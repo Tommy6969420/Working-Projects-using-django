@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transitions</title>
+</head>
+<body>
+    <style>
+.boxy{
+    display:flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+top: 50px;
+left: 50px;
+width:200px;
+height: 200px;
+background-color: rgba(208, 123, 12, 0.729);
+transition-property: all;
+transition-duration: 3s;
+transition-timing-function: ease-in-out;
+/* transition-delay: 1s; */
+
+}
+.inboxy{
+width:100px;
+height: 100px;
+background-color:rgba(12, 91, 249, 0.734);
+}
+.boxy:hover{
+    background-color: rgba(3, 51, 146, 0.734);
+    transform:scale(0.5,0.5);
+    border-radius: 50%;
+    transform: rotate(90deg);
+
+}
+.inboxy:hover{
+    width:200px;
+    height: 200px;
+    background-color: red;
+    transition: all 3s ease-in-out;
+    transform:scale(0.5,0.5);
+    border-radius: 50%;
+    transform: rotate(90deg);
+    z-index: -3;
+}
+
+loader{
+position: absolute;
+top: 400px;
+left: 100px;
+width:100px;
+height: 100px;
+background-color: navy;
+transition: all 60s steps(60);
+}
+loader:hover{
+    width:600px;
+}
+.animate{
+    position: absolute;
+    top: 400px;
+    left: 300px;
+    width:100px;
+    height: 100px;
+    background-color: navy;
+    animation: develop 2s ease-in-out 1s infinite alternate;
+/* animation: name duration time-function delay iteration type */
+}
+.takeover{
+    position: absolute;
+    top: 100px;
+    left: 300px;
+    width: 100px;
+    height: 100px;
+    background-color: rgb(66, 128, 0);
+    animation: valuated 2s ease-in-out 0s infinite alternate;
+}
+
+@keyframes develop{
+    from{
+        background-color:red;
+        height: 150px;
+        width: 150px;
+        border-radius: 0px;
+    }
+    to{
+        transform: rotate(360deg);
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        background-color:navy;
+    }
+}
+@keyframes valuated{
+
+    0%{
+        background-color:rgb(7, 93, 10);
+        border-radius: 0px;
+    }
+    25%{        
+        width: 150px;
+        height: 150px;
+        background-color:rgb(19, 224, 207);
+
+    }
+    50%{
+        width: 200px;
+        height: 200px;
+        background-color:yellow;
+    }
+    100%{
+        transform: rotate(360deg);
+        border-radius: 50%;
+        background-color:rgb(212, 50, 206);
+    }
+
+}
+
+.circularLoader{
+    position: absolute;
+    bottom: 45px;
+    left: 100px;
+    width: 100px;
+    height: 100px;
+    border:10px solid rgb(255, 151, 16);
+    border-left:10px solid rgb(70, 8, 255);
+    border-radius: 50%;
+    animation: loader 1s linear 0s infinite;
+}
+@keyframes loader{
+0%{
+    transform: rotate(0deg);
+}
+100%{
+    transform:rotate(360deg);
+}
+}
+
+
+
+
+
+    </style>
+<body>
+<div class="boxy">
+    <div class="inboxy">
+    </div>
+</div>
+
+<div class="loader">
+    <loader>
+    </loader>
+    </div>
+<div class="animate"></div>
+</body>
+<div class="takeover">
+
+</div>
+<div class="circularLoader">
+
+
+
+</div>
+</body>
+
+</html>

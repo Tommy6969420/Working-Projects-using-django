@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+<section class="sub-header">
+
+
+    <nav>
+        <div class="logo">
+            <h3>CAMPUS</h3>
+        </div>
+        <div class="list" id="nav-list">
+            <i class="fas fa-times" onclick="hideMenu()"></i>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="course.html">Course</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            
+            </ul>
+            <a href="admission_form.html" class="nav-btn">Admission</a>
+        </div>
+        <i class="fas fa-bars" onclick="showMenu()"></i>
+    </nav>
+    <h1>About Us</h1>
+</section>
+
+<!-- ----------- About us Content-------- -->
+
+<section class="about-us">
+
+    <div class="row">
+        <div class="about-col">
+            <h1>We are the World's Largest University</h1>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Debitis tenetur aut error distinctio reiciendis! Iure recusandae praesentium sint esse voluptates veritatis eius? Optio minus dolorem consectetur ducimus, quos illum unde odit fuga tenetur laborum placeat voluptas cum quae facere illo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum, aliquid.</p>
+            <a href="" class="hero-btn about-btn">EXPLORE NOW</a>
+        </div>
+        <div class="about-col">
+            <img src="assets/about.jpg">
+        </div>
+    </div>
+</section>
+<!--------- footer --------->
+
+<section class="footer">
+    <h4>About Us</h4>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto nulla, voluptates ea harum deserunt id <br> rerum eos modi consectetur praesentium repellendus asperiores illo illum.</p>
+    <div class="icons">
+        <i class="fab fa-facebook-f"></i>
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-linkedin"></i>
+    </div>
+    <p>Made with <i class="far fa-heart"></i> by Learning in Public.</p>
+</section>
+
+
+
+
+    <!----------- JavaScript section for toggle menu at 700px --------------->
+    <script>
+        var navList = document.getElementById("nav-list");
+
+        function showMenu() {
+            navList.style.right = "0"
+        }
+
+        function hideMenu(){
+            navList.style.right = "-200px"
+
+            
+        }
+    </script>
+</body>
+</html>

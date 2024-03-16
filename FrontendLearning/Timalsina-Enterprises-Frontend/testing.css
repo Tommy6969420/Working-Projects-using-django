@@ -1,0 +1,50 @@
+/* Sidebar */
+<!--
+  #sidebar{
+    border-radius: 10px;
+    width: 150px;
+    height: 100%;
+    background: #F4C095;
+  }
+  .category{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .category>p{
+    padding: 3px;
+    font-size: 1.1rem;
+    color:  #071E22;
+    font-weight: 500;
+  }
+/* hero area */
+
+#hero{
+      border: 3px solid #39e1ff;
+    height:300px;
+    width: 20%; 
+
+  }
+.swiper {
+    width: 100%;
+    height: 100%;
+    border: 3px solid #071E22;
+  }
+
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

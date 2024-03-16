@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+div {
+    border: 2px solid aqua;
+}
+
+header {
+    height: 100px;
+    background-color: rgba(221, 31, 17, 0.5);    
+
+}
+#content{
+    background-color: antiquewhite;
+    height: 500px;
+}
+.contentArea{
+    display: inline-block;
+    height: 100px;
+    width: 100px;
+    background-color: rgba(14, 235, 14, 0.5);    
+}
+#footer{
+    height: 100px;
+    background-color: rgba(231, 14, 235, 0.5);    
+}

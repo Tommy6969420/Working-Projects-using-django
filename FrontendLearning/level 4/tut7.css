@@ -1,0 +1,29 @@
+#box{
+    height: 40px;
+    width:40px;
+    background-color: red;
+}
+@media (max-width : 300px){
+
+#box{
+    background-color: blanchedalmond;
+}
+
+}
+@media (min-width: 300px) and (max-width: 400px){
+    #box{
+        background-color: aqua;
+    }
+
+
+}
+@media (min-width: 400px) and (max-width: 600px){
+    #box{
+        background-color: navy;
+    }
+}
+@media (min-width:600px){
+    #box{
+        background-color: green;
+    }
+}

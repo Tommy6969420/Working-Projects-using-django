@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission</title>
+    <link rel="stylesheet" href="ad.css">
+
+</head>
+<body>
+    <div class="outer-box">
+        <div class="inner-box">
+            <header class="admission-header">
+                <h1>Admission</h1>
+                <p>It just takes 30 seconds</p>
+            </header>
+            <main class="admission-body">
+                <form action="">
+                    <p>
+                        <label for="fullname">Full Name: </label>
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+                    </p>
+                    <p>
+                        <label for="email">Email: </label>
+                        <input type="text" id="email" placeholder="Enter your email" required>
+                    </p>
+                    <p>
+                        <label for="contact">Phone_Number: </label>
+                        <input type="number" id="contact" placeholder="Enter your phone Number" required>
+                    </p>
+                    <p>
+                        <label for="faculty">Interested Course: </label>
+                        <select id="faculty" class="select-box" required>
+                            <option value="" disabled selected hidden>Select an Course</option>
+                            <option value="option1">BIT</option>
+                            <option value="option2">BBA</option>
+                        </select>
+                    </p>
+                    <p>
+                        <input type="submit" id="submit" value="Submit">
+                    </p>
+                </form>
+            </main>
+        </div>
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+    </div>
+</body>
+</html>

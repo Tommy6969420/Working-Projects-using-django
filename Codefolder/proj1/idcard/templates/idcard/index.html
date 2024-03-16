@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idcard generator</title>
+    <style>
+.container{
+    display: inline-block;
+    width: 45%;
+    border: 3px solid rgb(15, 49, 240);
+
+}
+.school{
+align-items: center;
+text-align: center;
+}
+.std{
+padding:10px;
+margin:10px;
+line-height: 1em;   
+}
+img{
+    height: 150px;
+    width: 150px;
+    display:inline-block;
+    position:relative;
+    bottom:200px;
+    left:180px;
+}
+    </style>
+</head>
+<body>
+    {%for std in stdsinfo%}
+    <div class="container">
+    <div class="school">
+    <h4>Sarathi Shiksha Niketan English School </h4>
+    <h4>Bagmati -8 Makwanpur</h4>
+</div>
+<div class="std">
+
+        <p>Name: {{std.name}}</p>
+        <p style="display: inline;">Class: {{std.std_class}}</p>
+        <p style="display: inline;">"{{std.section}}"</p>
+        <p>Roll: {{std.roll_no}}</p>
+        <p>Address: {{std.address}}</p>
+                <p>Contact: {{std.contact}}</p>
+                <p>Guardian's Name: {{std.parents_name}}</p>
+        <img src="{{std.std_photo.url}}">
+</div>
+
+</div>
+
+{%endfor%}
+</body>
+</html>
