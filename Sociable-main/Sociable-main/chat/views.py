@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from.models import Messaging,Connect
 from users.models import User
+from users.models import UserImage
 from.serializers import MessagingSerializer,UserSerialzer
 # Create your views here.
 @api_view(['GET'])
@@ -72,10 +73,11 @@ def index(request):
     if data_received:
         username=data_received['username']
         user=User.objects.filter(username=username).values('id','username',)
-        connected=Connect.objects.filter(user__username=username).values('friends__id','friends__username',)
+        connected=Connect.objects.filter(user__username=username).values('friends__id','friends__username',"friends__userimage__image")
         context={
             "user":user,
             "recievers":connected,
+
         }
         return render(request,"chat/index.html",context)
     else:
@@ -91,8 +93,8 @@ class MessagingView2(generics.ListAPIView,generics.UpdateAPIView,generics.Destro
     queryset=Messaging.objects.all().order_by('-id')[:5]
     lookup_field='id'
     serializer_class= MessagingSerializer
-
 class ConnectView(APIView):
+
     def get(self,request):
         data=request.data
         username=data['username']
@@ -115,6 +117,7 @@ class ConnectView(APIView):
             print(e)
         return Response({"status":200,"message":"Friend added"})
     def delete(self,request):
+
         try:
             data=request.data
             username=data['username']

@@ -1,0 +1,37 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+}
+body{
+    margin:5px;
+}
+.top{
+    height:auto;
+width: 95%;
+margin:auto;
+}
+.top>h2{
+    text-align: center;
+    margin: 20px 0px;
+}
+.FormContainer{
+height:auto;
+width: 95%;
+margin:auto;
+}
+.bottom{
+    height:auto;
+width: 95%;
+margin:auto;
+}
+.full{
+    overflow: hidden;
+    width: 85%;
+    width: 85%;
+    margin:auto;
+    border:2px solid #686262ab;
+}
+#id_gender>div{
+    display: inline;
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+</head>
+<body>
+    
+<h1>Settings</h1>
+<h1> {{photo.user.username}}</h1>
+<div class="profile-pict">
+    <center>
+        <img src="{{ photo.image.url}}" alt="Profile Picture" width="30%" 
+        height="30%" id="profilePhoto">
+    </center>
+    </div>
+<form action="{%url 'settings'%}" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+<input type="file" name="profile-pic-change" id="profile-picture" accept="image/png, image/gif, image/jpeg">
+<input type="submit" value="Change">
+</form>
+
+<p clas='userInfo'>User's Full Name: {{photo.user.full_name}}</p>
+<p clas='userInfo'>User's Contact Email: {{photo.user.contact_email}}</p>
+
+</body>
+</html>

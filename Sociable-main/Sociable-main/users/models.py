@@ -1,5 +1,5 @@
 from django.db import models
-
+from PIL import Image
 # Create your models here.
 class User(models.Model):
     GENDER_CHOICES=(
@@ -23,8 +23,6 @@ class Response(models.Model):
     comment=models.TextField(null=True,blank=True)
     def __str__(self):
         return f"{self.responder.username}"
-
-
 class Post(models.Model):
     author=models.ForeignKey(User,on_delete=models.CASCADE,blank=False,null=False)
     description=models.TextField(blank=True,null=True)
@@ -33,13 +31,18 @@ class Post(models.Model):
     # reactions=models.ManyToManyField(Response,null=True,blank=True)
     def __str__(self):
         return f"{self.author.username} {self.description}"
+    def save(self, *args, **kwargs):
+        instance = super(UserImage, self).save(*args, **kwargs)
+        image = Image.open(instance.photo.path)
+        image.save(instance.photo.path,quality=20,optimize=True)
+        return instance
 class ResposePost(models.Model):
     post=models.ForeignKey(Post,on_delete=models.CASCADE)
     response=models.ForeignKey(Response ,on_delete=models.CASCADE)
     def __str__(self):
         return f"{self.post.author} {self.response.responder}"
 class UserImage(models.Model):
-    user=models.ForeignKey(User,on_delete=models.CASCADE,)
-    image=models.ImageField(upload_to='profiles/',null=True,blank=True, default='profiles/avatar.jpg')
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    image=models.ImageField(upload_to='profiles/',null=True,blank=True, default='profiles/others-avatar.jpg')
     def __str__(self):
         return f'{self.user}'

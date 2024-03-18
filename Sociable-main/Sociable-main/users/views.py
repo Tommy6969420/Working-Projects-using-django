@@ -3,25 +3,24 @@ from.forms import UserForm, PostForm
 from.models import Post,User,UserImage
 from django.core.exceptions import ObjectDoesNotExist
 from chat.models import Connect
+from rest_framework.views import APIView 
+from django.http import HttpResponse
 # from django.http import HttpResponse
 # Create your views here.
-
+from rest_framework.response import Response
 def welcome(request):
     return render(request,'users/welcome.html')
-
 def index(request):
     if request.method=="POST":
-        print("hello mf")
         form=UserForm(request.POST)
         username=request.POST.get("username")
         gender=request.POST.get("gender")
         full_name=request.POST.get("full_name")
         date_of_birth=request.POST.get("date_of_birth")
-        print(username,gender,full_name,date_of_birth,)
         if form.is_valid():
             username=request.POST.get("username")
             form.save()
-            return redirect('homepip',username)
+            return redirect('home',username)
         else:
             form=UserForm()
             msg="form validation error please refill the form, tips:make sure youre using your own information"
@@ -41,7 +40,6 @@ def login(request):
         username=request.POST.get("username")
         password=request.POST.get("password")
         users=User.objects.values("username","password")
-        # print(users.count())
         usernames=[users[i]["username"]for i in range(users.count())]
         passwords=[users[i]["password"]for i in range(users.count())]
         try:
@@ -56,14 +54,12 @@ def login(request):
         except ValueError:
             context={'response':'Username not found'}
             return render(request,"users/login.html",context)
-            print(passwords)
     context={'response':'Please enter your credentials'}
     return render(request,"users/login.html",context)
 def home(request,username):
     data_received = request.session.get('data', None)
     if data_received:
         users=User.objects.values("username","password")
-        # print(users.count())
         usernames=[users[i]["username"]for i in range(users.count())]
         try:
             if usernames.index(username) >= 0:
@@ -99,17 +95,70 @@ def home(request,username):
     
     else:
         return redirect('login')
+class SettingView(APIView):
+    def get(self,request):
+        try:
+            data_received = request.session.get('data', None)
+            username=data_received["username"]
+            password=data_received['password']
+            try:
+                user=User.objects.get(username=username)           
+            except User.DoesNotExist:
+                return redirect("login")
+            if authenticte_user(username,password) == True:
+                try:
+                    profile_photo=UserImage.objects.filter(user=user).order_by('-id').first()
+                except UserImage.DoesNotExist:
+                    gender=user.gender
+                    if user.gender=="male":
+                        user_image=UserImage(user=user,image="profiles/male-avatar.jpg")
+                        user_image.save()
+                    elif user.gender=="female":
+                        user_image=UserImage(user=user,image="profiles/female-avatar.jpg")
+                        user_image.save()
+                    else:
+                        user_image=UserImage(user=user,image="profiles/others-avatar.jpg")
+                        user_image.save()         
+                profile_photo=UserImage.objects.filter(user=user).order_by('-id').first()
+                user_posts=Post.objects.filter(author=user)
+                context={
+                        "user":user,
+                        "photo":profile_photo,
+                        'posts':user_posts
+                    }
+                return render(request,"users/settings.html",context)
+            else:
+                    return redirect('login')
+        except Exception as e:
+            print(e)
+            return redirect('login')
+    def post(self,request):
+        data_received = request.session.get('data', None)
+        username=data_received['username']
+        image=request.FILES.get('profile-pic-change')
+        user=User.objects.get(username=username)
+        if image:
+            new_profile=UserImage(user=user,image=image)
+            new_profile.save()
+            profile_photo=UserImage.objects.filter(user=user).order_by('-id').first()
+            user_posts=Post.objects.filter(author=user)
+            context={
+                            "user":user,
+                            "photo":profile_photo,
+                            'posts':user_posts
+                        }     
+            return render(request,'users/settings.html',context)
+    def post_description(self,request):
+        text=request.POst
 def profile(request,username):
     if request.method=="post":
         pass
     try:
         user=User.objects.get(username=username)
     except User.DoesNotExist:
-        return redirect("login")
-    try:
-        profile_photo=UserImage.objects.get(user=user)
-    except UserImage.DoesNotExist:
-        gender=user.gender
+        return HttpResponse("UserDoesnotExist")
+    profile_photo=UserImage.objects.filter(user=user).order_by('-id').first()
+    if not profile_photo:
         if user.gender=="male":
             user_image=UserImage(user=user,image="profiles/male-avatar.jpg")
             user_image.save()
@@ -119,8 +168,7 @@ def profile(request,username):
         else:
             user_image=UserImage(user=user,image="profiles/others-avatar.jpg")
             user_image.save()
-                       
-        profile_photo=UserImage.objects.get(user=user)
+        profile_photo=UserImage.objects.filter(user=user).order_by('-id').first()
     user_posts=Post.objects.filter(author=user)
     context={
             "user":user,
@@ -128,7 +176,6 @@ def profile(request,username):
             'posts':user_posts
         }
     return render(request,'users/profile.html',context)
-
 def friends(request):
     data_received = request.session.get('data', None)
     if data_received:
@@ -139,9 +186,7 @@ def friends(request):
             friends=Connect.objects.filter(user__username=username).values('friends__username')
             add_friends=User.objects.exclude(username__in=list_obj).exclude(username=username)
             friends__obj=list(friends.values_list('friends__username',flat=True))
-            print(friends__obj)
             req_friends=Connect.objects.filter(friends__username=username).exclude(user__username__in=friends__obj).values('user__username')
-            print(req_friends)
             context={
                 "user":user,
                 "friends":friends,
@@ -151,4 +196,18 @@ def friends(request):
             return render(request,'users/friends.html',context)
         except User.DoesNotExist:
             return redirect("login")
-    return redirect("login")    
+    return redirect("login") 
+def authenticte_user(username,password):
+        users=User.objects.values("username","password")
+        usernames=[users[i]["username"]for i in range(users.count())]
+        passwords=[users[i]["password"]for i in range(users.count())]
+        try:
+            if usernames.index(username) >= 0:
+                if passwords[usernames.index(username)]==password:
+                    return True
+                else:
+                    context={'response':'Password Unmatched'}
+                    return False
+        except ValueError:
+            context={'response':'Username not found'}
+            return False

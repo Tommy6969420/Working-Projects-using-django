@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_browser_reload",
     'users',
-    'chat',
+    'chat.apps.ChatConfig',
     'rest_framework',
 ]
 
@@ -139,6 +139,7 @@ STATIC_ROOT = BASE_DIR / "sociable" / "staticfiles"
 STATICFILES_DIRS=[
     BASE_DIR / 'chat' / "static" ,
     BASE_DIR / 'sociable' / "static" ,
+    BASE_DIR / 'users' / 'static',
 ]
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "sociable" / "media"

@@ -33,7 +33,7 @@
   <script>
     function addFriend(friend){
         //needs to be modified for different domains.
-       url=`http://127.0.0.1:8000/chat/add-connects/`
+       url=`${window.location}chat/add-connects/`
        username="{{user.username}}"
        console.log(username)
         fetch(url,{
@@ -53,11 +53,10 @@
             document.getElementById("add-response").innerHTML="Request Sent after request accepted you can do messaging"
         })
     }
-
     function acceptRequest(friend){
        
         //needs to be modified for different domains.
-        url=`http://127.0.0.1:8000/chat/add-connects/`
+        url=`${window.location}/chat/add-connects/`
        username="{{user.username}}"
         fetch(url,{
             method:"POST",
@@ -76,8 +75,6 @@
                 console.log(friend)
             }
         }).then(data=>{
-            // document.getElementById(`${frien}`).innerHTML="You are friends now. You can do messaging now."
-
         })
     }
 

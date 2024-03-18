@@ -1,39 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-{%load static%}
+<html lang="en" >
 <head>
+  {% load static %}
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Connect</title>
-<link rel="stylesheet" href="{% static 'css/chat.css'%}">
-</head>
+  <title>CodePen - Daily UI #013 | Direct Messaging</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'><link rel="stylesheet" href="{%static 'css/chat.css'%}">
 
+</head>
 <body>
-  <div>
-    {%for us in user%}<h1 id="username">
-      {{us.username}} 
-      
-    </h1><p id="sender">{{us.id}}</p>{%endfor%}
-  </div>
-  <div class="connected">
-      {% for reciever in recievers %}
-    <p onclick="openChat({{reciever.friends__id}})"  class="friends" id="txt{{reciever.friends__id}}">
-      {{reciever.friends__username}}
-    </p>
+ <h1> <div id="sender" style="display:none;">{% for us in user %}{{us.id}}{% endfor %}</div></h1>
+<!-- partial:index.partial.html -->
+<div class="center">
+  <div class="contacts">
+    <i class="fas fa-bars fa-2x"></i>
+    <h2>
+      Contacts
+    </h2>
+    {% for reciever in recievers %}<div class="contact" onclick="openChat({{reciever.friends__id}})" id="txt{{reciever.friends__id}}" >
+      <div class="pic" style="background-image: url(../media/{{reciever.friends__userimage__image}});" id="img-{{reciever.friends__id}}"></div>
+      <div class="name">
+        {{reciever.friends__username}}
+<!-- <img src="../media/{{reciever.friends__userimage__image}}" > -->
+      </div>
+    </div>
     {% endfor %}
   </div>
-  <div id="messageContainer">
+  <div class="chat" >
+    <div class="contact bar">
+      <div class="pic stark"></div>
+      <div class="name" id="active-message">
+        Start a new conversation 
+      </div>
+      <div class="seen">
+        You're connected on Sociable
+      </div>
+    </div>
+    <div class="messages">
+      {% comment %} <div class="time">
+        Today at 11:41
+      </div> {% endcomment %}
+      <div id="chat">
+      <div class="message reciever">
+      </div>
+      <div class="message sender">
+      </div>
+    </div>
+      <div class="message reciever">
+        <div class="typing typing-1"></div>
+        <div class="typing typing-2"></div>
+        <div class="typing typing-3"></div> 
+      </div>
+    </div>
+    <div class="input">
+     <!-- <i class="fas fa-camera"></i><i class="far fa-laugh-beam"></i> -->  
+       <input type="text" name="message" id='inputMsg' autofocus>
+      <input type="submit" value="send"  id="msgBtn" onclick="postMessage()">
+    </div>
   </div>
-<div class="sendMessage" id="sendMessage">
-  <p>Send Messages:</p>
-    <input type="text" name="message" id='inputMsg' autofocus>
-    <input type="submit" value="Send" id="msgBtn"  onclick="postMessage()">
 </div>
-<p id="reciever">
-</p>
-<script>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+  <script>
 
-  function postMessage(){
+
+function postMessage(){
     let message = document.getElementById('inputMsg').value;
     user_by = parseInt(user_by);
     let data = {
@@ -52,8 +83,9 @@
     to_id=to_id;
     }).catch(error => console.error('Error:', error));
     }
-  </script>  <script src="{% static "js/script.js" %}">
-</script>
-</body>
 
+  </script>
+  <script  src="{%static "js/script.js"%}"></script>
+
+</body>
 </html>

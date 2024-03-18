@@ -4,26 +4,93 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <!-- Add CSS links for styling -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>{{ name }}</title>
 </head>
 <body>
     <header>
-        <!-- Header content: Logo, Navigation, etc. -->
-        <h1>Welcome to Sociable: {{ name }}</h1>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="{%url 'profile' name %}">Profile</a></li>
-                <li><a href="{%url 'friends'%}">Friends</a></li>
-                <li><a href="{% url "chat" %}">Messages</a></li>
+                <li> <a href="#" id="fb"> <i class="fa-solid fa-s"></i> </a> </li>
+                <li> <button id="search_btn" class="tooltip" data-tooltip="Search"> <i class="fas fa-search    "></i> </button> </li>
+                <li id="space2"></li>
+                <li> <a class="tooltip active" data-tooltip="Home" href="#" id="home"> <i class="fas fa-home    "></i> </a> </li>
+                <li> <a class="tooltip" data-tooltip="Friend" href="{%url 'friends'%}" id="friend"> 
+                    <i class="fa-solid fa-user-group"></i></a> </li>
+                <li id="space1"></li>
+                <li> <a class="tooltip" data-tooltip="Add" id="btn_plus" href="#"><i class="fas fa-plus    "></i></a> </li>
+                <li> <a class="tooltip" data-tooltip="Message" id="btn_msg" href="{%url 'chat'%}"><i class="fab fa-facebook-messenger    "></i></a></li>
+                <li> <a class="tooltip" data-tooltip="Notification" id="btn_bell" href="#"> <i class="fas fa-bell    "></i></a></li>
+                <li>  <a class="tooltip" data-tooltip="Profile" id="btn_profile" href="{%url 'profile' name %}"><i class="fas fa-user-cog    "></i></a>  </li>
             </ul>
         </nav>
     </header>
+    <section id="posts">
+        <div class="f-card">
+            <div class="header">
+              <div class="options"><i class="fa fa-chevron-down"></i></div>
+              <img class="co-logo" src="http://placehold.it/40x40" />
+              <div class="co-name"><a href="#">PureCSS</a></div>
+              <div class="time"><a href="#">2hrs</a> · <i class="fa fa-globe"></i></div>
+            </div>
+            <div class="content">
+              <p>Height is optional, if no height is specified the image will be a square.Example: <a href="http://placehold.it/300">http://placehold.it/300</a> See More</p>
+            </div>
+          
+            <div class="reference">
+              <img class="reference-thumb" src="http://placehold.it/476x249" />
+              <div class="reference-content">
+                <div class="reference-title">A quick and simple image placeholder service. | PLACEHOLDER.it</div>
+                <div class="reference-subtitle">How does it work? Just put your image size after our URL and you'll get a placeholder.</div>
+                <div class="reference-font">placeholder.it</div>
+              </div>
+            </div>
+            <div class="social">
+              <div class="social-content"></div>
+              <div class="social-buttons">
+                <span><i class="fa fa-thumbs-up"></i>Like</span>
+                <span><i class="fa fa-comment"></i>Comment</span>
+                <span><i class="fa fa-share"></i>Share</span></div>
+            </div>
+          </div>
+    </section>
+      </body>
+    </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+    <!DOCTYPE html>
+<body>
 
     <div class="container">
-        <!-- Friends Section -->
+
         <section id="friends">
             <h2>Friends</h2>
             <ul>
@@ -46,7 +113,6 @@
             
             </div>
             </section>
-        <!-- Posts Section -->
         <section id="posts">
             <h2>Posts</h2>
             {% for post in posts %}
@@ -72,13 +138,12 @@
             {% endfor %}
         </section>
     </div>
-
-    <!-- Footer -->
     <footer>
-        <!-- Footer content: Copyright, Links, etc. -->
         <p>&copy; 2024 Sociable</p>
     </footer>
     <script src='{%static 'js/reactions.js'%}'> 
     </script>
 </body>
 </html>
+
+-->

@@ -1,14 +1,12 @@
-from django.db.models.signals import post_save, pre_delete
+from django.db.models.signals import post_save
 from users.models import User
-from django.dispatch import receiver
 from .models import Connect
+from users.models  import UserImage
 
 
-@receiver(post_save, sender=User) 
 def create_connect(sender, instance, created, **kwargs):
     if created:
         Connect.objects.create(user=instance)
-  
-@receiver(post_save, sender=User) 
-def save_connect(sender, instance, **kwargs):
-        instance.profile.save()
+        UserImage.objects.create(user=instance)
+post_save.connect(create_connect,sender=User)
+
