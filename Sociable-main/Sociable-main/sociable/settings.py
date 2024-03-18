@@ -35,7 +35,7 @@ ALLOWED_HOSTS=["*"]
 #     codespace_name = os.getenv("CODESPACE_NAME")
 #     codespace_domain = os.getenv("GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN")
 #     CSRF_TRUSTED_ORIGINS = [f'https://{codespace_name}-8000.{codespace_domain}','https://localhost:8000']
-
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000']
 # Application definition
 
 INSTALLED_APPS = [
